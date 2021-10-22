@@ -1,6 +1,4 @@
-# Portfolio-InstagramBot
-
-## Instagram Bot
+# Instagram Bot
 In this project I try to create an Bot that will:
 - Log into an Instagram account 
 - Take a list of Tags that the user is interested in
