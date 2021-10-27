@@ -65,9 +65,18 @@ class Instagram:
                                 'a[class="-qQT3"]'
                         )
                         search_element_select.click()
-                        self.open_posts(const.COUNT)
+                        counts = self.open_posts(const.COUNT)
+                        print('***********************************************************')
+                        print(f'*     HashTag: {tag}')
+                        print(f'*     Posts Liked: {counts[0]}')
+                        print(f'*     Comments Posted: {counts[1]}')
+                        print(f'*     Accounts Followed: {counts[2]}')
+                print('***********************************************************')
         def open_posts(self, count):
                 counter = 0
+                like_count = 0
+                follow_count = 0
+                comment_count = 0
                 time.sleep(2)
                 post_elements = self.driver.find_elements_by_css_selector(
                         'a[class="H-KQe"]'
@@ -81,18 +90,19 @@ class Instagram:
                                         liked = self.driver.find_element_by_css_selector(
                                                 'svg[aria-label="Unlike"]'
                                                 )
-                                        if liked != None:
-                                                print("Already Liked Post")
                                 except:
                                         self.like_post()
+                                        like_count += 1
                                         self.user_post()
-                                        self.comment_post()
-                                        self.follow_user()
-                                        print(counter)
+                                        commented = self.comment_post()
+                                        if commented:
+                                                comment_count += 1
+                                        followed = self.follow_user()
+                                        if followed: follow_count += 1
+                                        counter += 1
                                 time.sleep(2)
                                 self.close_post()
-                        else: break
-
+                        else: return [like_count, comment_count, follow_count]
         #Nested Functions
         def notification_enabler(self):
                 try:
@@ -114,10 +124,7 @@ class Instagram:
                 like_element = self.driver.find_element_by_css_selector(
                         'span[class="fr66n"]'
                         )     
-                like_element.click()
-                print('1 Post Liked')
-
-               
+                like_element.click()          
         def comment_post(self):
                 user = self.user_post()
                 comments = [f'Nice shot! @{user}',
@@ -130,22 +137,25 @@ class Instagram:
                        f'Getting inspired by you @{user}',
                         ':raised_hands: Yes!',
                         f'I can feel your passion @{user} :muscle:']
-                comment = comments[random.randint(0, len(comments))]                
+                comment = comments[random.randint(0, len(comments)-1)]                
                 comment_button_element = self.driver.find_element_by_css_selector(
                         'span[class="_15y0l"]'
                 )
-                comment_button_element.click()
-                time.sleep(2)
-                comment_element = self.driver.find_element_by_css_selector(
-                        'textarea[data-testid="post-comment-text-area"]'
-                )
-                comment_element.clear()
-                comment_element.send_keys(comment)
-                print(comment)
-                post_button_element = self.driver.find_element_by_css_selector(
-                        'button[data-testid="post-comment-input-button"]'
-                )
-                post_button_element.click()
+                try:
+                        comment_button_element.click()
+                        time.sleep(2)
+                        comment_element = self.driver.find_element_by_css_selector(
+                                'textarea[data-testid="post-comment-text-area"]'
+                        )
+                        comment_element.clear()
+                        comment_element.send_keys(comment)
+                        post_button_element = self.driver.find_element_by_css_selector(
+                                'button[data-testid="post-comment-input-button"]'
+                        )
+                        post_button_element.click()
+                        return True
+                except:
+                        return False
         def user_post(self):
                 user_element = self.driver.find_element_by_css_selector(
                       'a[class="sqdOP yWX7d     _8A5w5   ZIAjV "]'  
@@ -157,11 +167,9 @@ class Instagram:
                 )
                 close_element.click()
         def follow_user(self):
-                user = self.user_post()
-                follow_element = self.driver.find_element_by_xpath("//*[text()='Follow']")
-                
                 try:
+                        follow_element = self.driver.find_element_by_xpath("//*[text()='Follow']")
                         follow_element.click()
-                        print(f'{user} was followed')
+                        return True #Followed
                 except:
-                        print(f'{user} Could Not Be Followed')
+                        return False #No Follow

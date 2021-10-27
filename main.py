@@ -6,10 +6,6 @@ u_input = mainGUI.main()
 username = u_input[0]
 password = u_input[1]
 hashtags = u_input[2].split('-')
-print(f'Username: {username}')
-print(f'Password: {password}')
-for tag in hashtags:
-    print(f'Hashtags: {tag}')
 
 with Instagram() as bot:
     bot.open_instagram()

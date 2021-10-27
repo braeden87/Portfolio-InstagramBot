@@ -13,7 +13,7 @@ COMMENTS = ['Nice shot! @{}',
         'Getting inspired by you @{}',
         ':raised_hands: Yes!',
         'I can feel your passion @{} :muscle:']
-COUNT = 1
+COUNT = 2
 
 #GUI
 SCREEN_WIDTH = 600
