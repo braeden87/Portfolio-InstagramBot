@@ -47,40 +47,51 @@ class Instagram:
                 #Notifications
                 self.notification_enabler()
         #Go to search area
-        def search_tags(self, tag):
-                discover_window_element = self.driver.find_element_by_css_selector(
-                        'a[href="/explore/"]'
-                )
-                discover_window_element.click()
-                #Notifications
-                self.notification_enabler()
-                #Search For First Tag
-                search_element = self.driver.find_element_by_css_selector(
-                        'input[class="XTCLo x3qfX "]'
-                )
-                search_element.clear()
-                search_element.send_keys(tag)
-                search_element_select = self.driver.find_element_by_css_selector(
-                        'a[class="-qQT3"]'
-                )
-                search_element_select.click()
+        def search_tags(self, tags):
+                for tag in tags:
+                        discover_window_element = self.driver.find_element_by_css_selector(
+                                'a[href="/explore/"]'
+                        )
+                        discover_window_element.click()
+                        #Notifications
+                        self.notification_enabler()
+                        #Search For First Tag
+                        search_element = self.driver.find_element_by_css_selector(
+                                'input[class="XTCLo x3qfX "]'
+                        )
+                        search_element.clear()
+                        search_element.send_keys(tag)
+                        search_element_select = self.driver.find_element_by_css_selector(
+                                'a[class="-qQT3"]'
+                        )
+                        search_element_select.click()
+                        self.open_posts(const.COUNT)
         def open_posts(self, count):
-                #post_element = self.driver.find_element_by_css_selector(
-                #        'a[href="/p/CVQHItWlU6G/"]'
-                #)
+                counter = 0
                 time.sleep(2)
                 post_elements = self.driver.find_elements_by_css_selector(
                         'a[class="H-KQe"]'
                 )
-                for _ in range(count):
-                        for post in post_elements:
+                for post in post_elements:
+                        if counter < count:
                                 time.sleep(2)
                                 post.click()
-                                self.like_post()
-                                self.user_post()
-                                self.comment_post()
+                                liked = None
+                                try:
+                                        liked = self.driver.find_element_by_css_selector(
+                                                'svg[aria-label="Unlike"]'
+                                                )
+                                        if liked != None:
+                                                print("Already Liked Post")
+                                except:
+                                        self.like_post()
+                                        self.user_post()
+                                        self.comment_post()
+                                        self.follow_user()
+                                        print(counter)
                                 time.sleep(2)
                                 self.close_post()
+                        else: break
 
         #Nested Functions
         def notification_enabler(self):
@@ -102,9 +113,11 @@ class Instagram:
         def like_post(self): #Need to Make This recognize when a post is already liked
                 like_element = self.driver.find_element_by_css_selector(
                         'span[class="fr66n"]'
-                )
+                        )     
                 like_element.click()
                 print('1 Post Liked')
+
+               
         def comment_post(self):
                 user = self.user_post()
                 comments = [f'Nice shot! @{user}',
@@ -117,8 +130,7 @@ class Instagram:
                        f'Getting inspired by you @{user}',
                         ':raised_hands: Yes!',
                         f'I can feel your passion @{user} :muscle:']
-                comment = comments[random.randint(0, len(comments))]
-                
+                comment = comments[random.randint(0, len(comments))]                
                 comment_button_element = self.driver.find_element_by_css_selector(
                         'span[class="_15y0l"]'
                 )
@@ -144,3 +156,12 @@ class Instagram:
                         'div[class="            qF0y9          Igw0E     IwRSH      eGOV_         _4EzTm                                                                                  BI4qX            qJPeX            fm1AK   TxciK yiMZG"]'
                 )
                 close_element.click()
+        def follow_user(self):
+                user = self.user_post()
+                follow_element = self.driver.find_element_by_xpath("//*[text()='Follow']")
+                
+                try:
+                        follow_element.click()
+                        print(f'{user} was followed')
+                except:
+                        print(f'{user} Could Not Be Followed')

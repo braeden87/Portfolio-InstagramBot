@@ -1,9 +1,17 @@
 from instagram import Instagram
 import constants as const
+import GUI.GUI_Main as mainGUI
 
+u_input = mainGUI.main()
+username = u_input[0]
+password = u_input[1]
+hashtags = u_input[2].split('-')
+print(f'Username: {username}')
+print(f'Password: {password}')
+for tag in hashtags:
+    print(f'Hashtags: {tag}')
 
 with Instagram() as bot:
     bot.open_instagram()
-    bot.login(const.USERNAME_B, const.PASSWORD_B)
-    bot.search_tags('movie')
-    bot.open_posts(5)
+    bot.login(username, password)
+    bot.search_tags(hashtags)

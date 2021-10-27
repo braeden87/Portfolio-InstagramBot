@@ -1,9 +1,8 @@
+import pygame
+pygame.font.init()
+
 # Constants
 BASE_URL = 'https://www.instagram.com'
-USERNAME_J = 'JonasGarland_'
-PASSWORD_J = 'roommate402!'
-USERNAME_B = '__Braeden'
-PASSWORD_B = 'ginger_INSTAGRAM2'
 COMMENTS = ['Nice shot! @{}',
         'I love your profile! @{}',
         'Your feed is an inspiration :thumbsup:',
@@ -14,3 +13,15 @@ COMMENTS = ['Nice shot! @{}',
         'Getting inspired by you @{}',
         ':raised_hands: Yes!',
         'I can feel your passion @{} :muscle:']
+COUNT = 1
+
+#GUI
+SCREEN_WIDTH = 600
+SCREEN_HEIGHT = 625
+INPUTBOX_WIDTH = 500
+INPUTBOX_HEIGHT = 50
+BACKGROUND_COLOR = (255, 255, 255)
+TEXT_COLOR = (32, 32, 32)
+HIGHLIGHT_COLOR = (225, 225, 225)
+FONT = pygame.font.SysFont('arial', 32)
+TEXT_BOX_UNFOCUSED = (245, 245, 245)
