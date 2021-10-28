@@ -2,7 +2,9 @@ import pygame
 import constants as const
 
 class input_box:
-
+######################################################################
+# Constructor
+######################################################################
     def __init__(self, x, y, width, height, text = ''):
         self.box = pygame.Rect(x, y, width, height)
         self.text = text
@@ -10,7 +12,12 @@ class input_box:
         self.active = False
         self.tabbed = False
         self.color = const.TEXT_BOX_UNFOCUSED
-    
+######################################################################
+# Handle Event Method
+#
+# This method is accepts an event as an argument and decides what to  
+#do inside of the text box based on what event was passed in
+######################################################################    
     def handle_event(self, event):
         if event.type == pygame.MOUSEBUTTONDOWN:
             if self.box.collidepoint(event.pos):
@@ -27,7 +34,11 @@ class input_box:
                 else:
                     self.text += event.unicode
                 self.text_surface = const.FONT.render(self.text, True, const.TEXT_COLOR)
-        
+######################################################################
+# Draw Method
+#
+# This method will add the text box onto the screen / window
+######################################################################         
     def draw(self, screen):
        #Text 
         screen.blit(self.text_surface, (self.box.x + 5, self.box.y + 5))
