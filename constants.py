@@ -1,7 +1,9 @@
 import pygame
 pygame.font.init()
 
+##################################################
 # Constants
+##################################################
 BASE_URL = 'https://www.instagram.com'
 COMMENTS = ['Nice shot! @{}',
         'I love your profile! @{}',
@@ -15,7 +17,7 @@ COMMENTS = ['Nice shot! @{}',
         'I can feel your passion @{} :muscle:']
 COUNT = 2
 
-#GUI
+#GUI Constants
 SCREEN_WIDTH = 600
 SCREEN_HEIGHT = 625
 INPUTBOX_WIDTH = 500
