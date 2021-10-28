@@ -28,3 +28,5 @@ Once done inputting this information, the user has to click the submit button. A
 ## Inspiration For Project Creation
 I was inspired to make this project after hearing about the Instapy library. The library boasts that it is a tool to 'automate social media interaction in order to "farm" likes. I originally attempted to use the library and it was clear that there were some major bugs in the open source code and the project was not currently funcitonal. Instead of trying to fix the already created library, I wanted to see if I could do it myself. 
 
+## Project In Action
+Video Coming Soon.
