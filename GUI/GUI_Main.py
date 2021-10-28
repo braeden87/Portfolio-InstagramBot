@@ -8,6 +8,9 @@ pygame.init()
 screen = pygame.display.set_mode((const.SCREEN_WIDTH, const.SCREEN_HEIGHT))
 pygame.display.set_caption('Instagram Bot')
 
+######################################################################
+# Main
+######################################################################  
 def main():
     clock = pygame.time.Clock()
     input_box1 = input_box(50, 300, const.INPUTBOX_WIDTH, const.INPUTBOX_HEIGHT)
