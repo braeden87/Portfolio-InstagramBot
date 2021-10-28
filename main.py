@@ -2,6 +2,9 @@ from instagram import Instagram
 import constants as const
 import GUI.GUI_Main as mainGUI
 
+######################################################################
+#Main
+######################################################################
 u_input = mainGUI.main()
 username = u_input[0]
 password = u_input[1]
