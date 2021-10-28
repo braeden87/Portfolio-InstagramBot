@@ -8,6 +8,9 @@ import random
 
 
 class Instagram:
+        ##################################################
+        # 
+        ##################################################
         def __init__(self):
                 self.driver = webdriver.Chrome(ChromeDriverManager().install())
                 super(Instagram, self).__init__()
@@ -19,10 +22,18 @@ class Instagram:
                 time.sleep(30)
                 print('Exit')
         
-        #Opens the Webpage
+######################################################################
+# Open Instagram Method
+#
+#This method opens the instagram home page
+######################################################################
         def open_instagram(self):
                 self.driver.get(const.BASE_URL)
-        #Login 
+######################################################################
+#Login Method
+#
+#This method will log the user into their instagram account. 
+######################################################################
         def login(self, username, password):
                 #Username
                 username_element = self.driver.find_element_by_css_selector(
@@ -46,7 +57,12 @@ class Instagram:
                 self.save_info_popup()
                 #Notifications
                 self.notification_enabler()
-        #Go to search area
+######################################################################
+#Search Tags Method
+#
+#This method will accept a list of hastags and will then loop through
+#the list of tags. In each loop it will call the open posts method
+######################################################################
         def search_tags(self, tags):
                 for tag in tags:
                         discover_window_element = self.driver.find_element_by_css_selector(
@@ -72,6 +88,15 @@ class Instagram:
                         print(f'*     Comments Posted: {counts[1]}')
                         print(f'*     Accounts Followed: {counts[2]}')
                 print('***********************************************************')
+######################################################################
+#Open Posts Method
+#
+#This method will accept a number which represent how many posts to 
+#interact with. For each post this method will call the like, comment, 
+#and follow method on each post that will be interacted with
+#
+#Only posts that have never been liked are interacted with
+######################################################################
         def open_posts(self, count):
                 counter = 0
                 like_count = 0
@@ -103,7 +128,12 @@ class Instagram:
                                 time.sleep(2)
                                 self.close_post()
                         else: return [like_count, comment_count, follow_count]
-        #Nested Functions
+######################################################################
+#Notification Enabler Method
+#
+#When you log into instagram their are two popups. This method is used
+#to close one of those.
+######################################################################
         def notification_enabler(self):
                 try:
                         notification_element = self.driver.find_element_by_css_selector(
@@ -112,6 +142,12 @@ class Instagram:
                         notification_element.click()
                 except:
                         print('Notification Element not present')
+######################################################################
+#Save Info Popup Method
+#
+#When you log into instagram their are two popups. This method is used
+#to close one of those.
+######################################################################                        
         def save_info_popup(self):
                 try:
                         save_info_element = self.driver.find_element_by_css_selector(
@@ -120,11 +156,23 @@ class Instagram:
                         save_info_element.click()
                 except:
                         print('Save Info Element Not Present')
-        def like_post(self): #Need to Make This recognize when a post is already liked
+######################################################################
+#Like Post Method
+#
+#This method will like each post
+######################################################################     
+        def like_post(self): 
                 like_element = self.driver.find_element_by_css_selector(
                         'span[class="fr66n"]'
                         )     
-                like_element.click()          
+                like_element.click()    
+######################################################################
+#Comment Post Method
+#
+#This method will be used to comment on each post. It clicks on the 
+#comment button, then adds a random comment from the comments list 
+#into the text field and clicks post.
+######################################################################                
         def comment_post(self):
                 user = self.user_post()
                 comments = [f'Nice shot! @{user}',
@@ -156,16 +204,34 @@ class Instagram:
                         return True
                 except:
                         return False
+######################################################################
+#User Method
+#
+#This method will get the username of whoever posted the current post
+######################################################################               
         def user_post(self):
                 user_element = self.driver.find_element_by_css_selector(
                       'a[class="sqdOP yWX7d     _8A5w5   ZIAjV "]'  
                 ).text
                 return user_element
+######################################################################
+#Close Post Method
+#
+#This method will click on the x in the top right corner of the page 
+#when a post is open to close the post. 
+######################################################################        
         def close_post(self):
                 close_element = self.driver.find_element_by_css_selector(
                         'div[class="            qF0y9          Igw0E     IwRSH      eGOV_         _4EzTm                                                                                  BI4qX            qJPeX            fm1AK   TxciK yiMZG"]'
                 )
                 close_element.click()
+######################################################################
+#Follow User Method
+#
+#This method will be used to click on the follow button next to the 
+#Users name. Therefor following this user. (If the user is already 
+#being followed, nothing happens)
+######################################################################               
         def follow_user(self):
                 try:
                         follow_element = self.driver.find_element_by_xpath("//*[text()='Follow']")
