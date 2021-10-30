@@ -5,6 +5,7 @@ from webdriver_manager.chrome import ChromeDriverManager
 import constants as const
 import time
 import random
+from datetime import datetime
 
 
 class Instagram:
@@ -19,7 +20,6 @@ class Instagram:
                 print ('Enter')
                 return self
         def __exit__(self, exc_type, exc_value, exc_traceback):
-                time.sleep(30)
                 print('Exit')
         
 ######################################################################
@@ -81,12 +81,15 @@ class Instagram:
                                 'a[class="-qQT3"]'
                         )
                         search_element_select.click()
+                        counts = 0
                         counts = self.open_posts(const.COUNT)
+                        utc_time = datetime.utcnow()
                         print('***********************************************************')
                         print(f'*     HashTag: {tag}')
                         print(f'*     Posts Liked: {counts[0]}')
                         print(f'*     Comments Posted: {counts[1]}')
                         print(f'*     Accounts Followed: {counts[2]}')
+                        print(f'*     Current TimeStamp: {utc_time}')
                 print('***********************************************************')
 ######################################################################
 #Open Posts Method
