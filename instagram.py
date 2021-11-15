@@ -66,8 +66,8 @@ class Instagram:
 #the list of tags. In each loop it will call the open posts method
 ######################################################################
         def search_tags(self, tags):
+                result = ''
                 for tag in tags:
-                        result = ''
                         time.sleep(1)
                         discover_window_element = self.driver.find_element_by_css_selector(
                                 'a[href="/explore/"]'
@@ -132,7 +132,8 @@ class Instagram:
                                         if commented:
                                                 comment_count += 1
                                         followed = self.follow_user()
-                                        if followed: follow_count += 1
+                                        if followed: 
+                                                follow_count += 1
                                         counter += 1
                                 time.sleep(2)
                                 self.close_post()
