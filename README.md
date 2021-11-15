@@ -22,8 +22,10 @@ All of the features described above can be monitored using the window opened wit
 - Username
 - Password
 - At least 1 Hashtag (each tag should be seperated by a -)
+- Email
+- Password for Email
 
-Once done inputting this information, the user has to click the submit button. After all of this, the browser will open and Instagram Automation will begin. The program is currently set to like 2 posts from each tag. But this can be changed to any number. 
+Once done inputting this information, the user has to click the submit button. After all of this, the browser will open and Instagram Automation will begin. The program is currently set to like 2 posts from each tag. But this can be changed to any number. After the program is finished, an email will be sent from the users email that they provided to that same email with a report of how many posts were interacted with.
 
 ## Inspiration For Project Creation
 I was inspired to make this project after hearing about the Instapy library. The library boasts that it is a tool to 'automate social media interaction in order to "farm" likes. I originally attempted to use the library and it was clear that there were some major bugs in the open source code and the project was not currently funcitonal. Instead of trying to fix the already created library, I wanted to see if I could do it myself. 
