@@ -28,6 +28,7 @@ class Instagram:
 #This method opens the instagram home page
 ######################################################################
         def open_instagram(self):
+                time.sleep(1)
                 self.driver.get(const.BASE_URL)
 ######################################################################
 #Login Method
@@ -35,6 +36,7 @@ class Instagram:
 #This method will log the user into their instagram account. 
 ######################################################################
         def login(self, username, password):
+                time.sleep(1)
                 #Username
                 username_element = self.driver.find_element_by_css_selector(
                         'input[name="username"]'
@@ -65,6 +67,8 @@ class Instagram:
 ######################################################################
         def search_tags(self, tags):
                 for tag in tags:
+                        result = ''
+                        time.sleep(1)
                         discover_window_element = self.driver.find_element_by_css_selector(
                                 'a[href="/explore/"]'
                         )
@@ -84,13 +88,14 @@ class Instagram:
                         counts = 0
                         counts = self.open_posts(const.COUNT)
                         utc_time = datetime.utcnow()
-                        print('***********************************************************')
-                        print(f'*     HashTag: {tag}')
-                        print(f'*     Posts Liked: {counts[0]}')
-                        print(f'*     Comments Posted: {counts[1]}')
-                        print(f'*     Accounts Followed: {counts[2]}')
-                        print(f'*     Current TimeStamp: {utc_time}')
-                print('***********************************************************')
+                        result += '***********************************************************\n'
+                        result += f'*     HashTag: {tag}\n'
+                        result += f'*     Posts Liked: {counts[0]}\n'
+                        result += f'*     Comments Posted: {counts[1]}\n'
+                        result += f'*     Accounts Followed: {counts[2]}\n'
+                        result += f'*     Current TimeStamp: {utc_time}\n'
+                result += '***********************************************************'
+                return result;
 ######################################################################
 #Open Posts Method
 #
@@ -101,6 +106,7 @@ class Instagram:
 #Only posts that have never been liked are interacted with
 ######################################################################
         def open_posts(self, count):
+                time.sleep(1)
                 counter = 0
                 like_count = 0
                 follow_count = 0
@@ -138,6 +144,7 @@ class Instagram:
 #to close one of those.
 ######################################################################
         def notification_enabler(self):
+                time.sleep(1)
                 try:
                         notification_element = self.driver.find_element_by_css_selector(
                                 'button[class="aOOlW  bIiDR  "]'
@@ -152,6 +159,7 @@ class Instagram:
 #to close one of those.
 ######################################################################                        
         def save_info_popup(self):
+                time.sleep(1)
                 try:
                         save_info_element = self.driver.find_element_by_css_selector(
                                 'button[class="sqdOP  L3NKy   y3zKF     "]'
@@ -165,6 +173,7 @@ class Instagram:
 #This method will like each post
 ######################################################################     
         def like_post(self): 
+                time.sleep(1)
                 like_element = self.driver.find_element_by_css_selector(
                         'span[class="fr66n"]'
                         )     
@@ -177,17 +186,18 @@ class Instagram:
 #into the text field and clicks post.
 ######################################################################                
         def comment_post(self):
+                time.sleep(1)
                 user = self.user_post()
                 comments = [f'Nice shot! @{user}',
                         f'I love your profile! @{user}',
-                        'Your feed is an inspiration :thumbsup:',
-                        'Just incredible :open_mouth:',
+                        'Your feed is an inspiration',
+                        'Just incredible',
                         f'What camera did you use @{user}?',
                         f'Love your posts @{user}',
                         f'Looks awesome @{user}',
                        f'Getting inspired by you @{user}',
                         ':raised_hands: Yes!',
-                        f'I can feel your passion @{user} :muscle:']
+                        f'I can feel your passion @{user}']
                 comment = comments[random.randint(0, len(comments)-1)]                
                 comment_button_element = self.driver.find_element_by_css_selector(
                         'span[class="_15y0l"]'
@@ -203,6 +213,7 @@ class Instagram:
                         post_button_element = self.driver.find_element_by_css_selector(
                                 'button[data-testid="post-comment-input-button"]'
                         )
+                        time.sleep(2)
                         post_button_element.click()
                         return True
                 except:
@@ -213,6 +224,7 @@ class Instagram:
 #This method will get the username of whoever posted the current post
 ######################################################################               
         def user_post(self):
+                time.sleep(1)
                 user_element = self.driver.find_element_by_css_selector(
                       'a[class="sqdOP yWX7d     _8A5w5   ZIAjV "]'  
                 ).text
@@ -224,8 +236,9 @@ class Instagram:
 #when a post is open to close the post. 
 ######################################################################        
         def close_post(self):
+                time.sleep(1)
                 close_element = self.driver.find_element_by_css_selector(
-                        'div[class="            qF0y9          Igw0E     IwRSH      eGOV_         _4EzTm                                                                                  BI4qX            qJPeX            fm1AK   TxciK yiMZG"]'
+                        'div[class="             qF0y9          Igw0E     IwRSH      eGOV_         _4EzTm                                                                                  BI4qX            qJPeX            fm1AK   TxciK yiMZG"]'
                 )
                 close_element.click()
 ######################################################################
@@ -236,6 +249,7 @@ class Instagram:
 #being followed, nothing happens)
 ######################################################################               
         def follow_user(self):
+                time.sleep(1)
                 try:
                         follow_element = self.driver.find_element_by_xpath("//*[text()='Follow']")
                         follow_element.click()

@@ -16,12 +16,16 @@ def main():
     input_box1 = input_box(50, 300, const.INPUTBOX_WIDTH, const.INPUTBOX_HEIGHT)
     input_box2 = input_box(50, 400, const.INPUTBOX_WIDTH, const.INPUTBOX_HEIGHT)
     input_box3 = input_box(50, 500, const.INPUTBOX_WIDTH, const.INPUTBOX_HEIGHT)
-    input_boxes = [input_box1, input_box2, input_box3]
+    input_box4 = input_box(50, 600, const.INPUTBOX_WIDTH, const.INPUTBOX_HEIGHT)
+    input_box5 = input_box(50, 700, const.INPUTBOX_WIDTH, const.INPUTBOX_HEIGHT)
+    input_boxes = [input_box1, input_box2, input_box3, input_box4, input_box5]
     header1 = header_box(50, 260, const.INPUTBOX_WIDTH, const.INPUTBOX_HEIGHT, 'Username:')
     header2 = header_box(50, 360, const.INPUTBOX_WIDTH, const.INPUTBOX_HEIGHT, 'Password:')
     header3 = header_box(50, 460, const.INPUTBOX_WIDTH, const.INPUTBOX_HEIGHT, 'Hashtags:')
-    headers = [header1, header2, header3]
-    submit = submit_button(200, 560, 200, const.INPUTBOX_HEIGHT)
+    header4 = header_box(50, 560, const.INPUTBOX_WIDTH, const.INPUTBOX_HEIGHT, 'Email:')
+    header5 = header_box(50, 660, const.INPUTBOX_WIDTH, const.INPUTBOX_HEIGHT, 'Password For Email:')
+    headers = [header1, header2, header3, header4, header5]
+    submit = submit_button(200, 760, 200, const.INPUTBOX_HEIGHT)
     running = True
 
     while running:
